@@ -29,14 +29,15 @@ WHERE codeEquipeLocaux = 112 OR codeEquipeVisiteurs = 112;
 
 
 5
-CREATE PROCEDURE EquipesGagnantes(IN numJourneeParam INT)
+    delimiter //
+CREATE PROCEDURE EquipesGagnantes(  numJourneeParam INT)
 BEGIN
     SELECT e.nomEquipe 
     FROM Match m
     JOIN Equipe e ON (m.codeEquipeLocaux = e.codeEquipe AND m.nombreButLocaux > m.nombreButVisiteurs)
         OR (m.codeEquipeVisiteurs = e.codeEquipe AND m.nombreButVisiteurs > m.nombreButLocaux)
     WHERE m.numJournee = numJourneeParam;
-END;
+END//
 
 
 
